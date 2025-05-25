@@ -74,6 +74,10 @@ category - фильтр по категории
 
 condition - фильтр по состоянию
 
+## Тесты
+Запуск тестов:
+python manage.py test exchange_app.tests.test
+
 ## Модели данных
 # Объявление (Ad)
 - Пользователь (связь с User)
