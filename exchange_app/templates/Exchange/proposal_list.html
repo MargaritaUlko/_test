@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Список предложений</h2>
+{% if user.is_authenticated %}
+    <a href="{% url 'proposal-create' %}">+ Новое предложение обмена</a>
+{% endif %}
+
+<form method="get" class="filter-form">
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-sm btn-primary">Фильтровать</button>
+</form>
+
+{% for proposal in object_list %}
+<div class="proposal">
+    <p>От: {{ proposal.ad_sender.title }}</p>
+    <p>Кому: {{ proposal.ad_receiver.title }}</p>
+    <p>Статус: {{ proposal.get_status_display }}</p>
+    
+    {% if proposal.ad_receiver.user == user %}
+    <a href="{% url 'proposal-update' proposal.pk %}">Изменить статус</a>
+    {% endif %}
+</div>
+<hr>
+{% endfor %}
+{% endblock %}
